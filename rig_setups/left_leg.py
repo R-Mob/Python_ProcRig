@@ -63,6 +63,7 @@ def leftLegSetup():
     lib.createRenameAndParent(lib.project_Name + '_toe_l_LOC', lib.project_Name + '_outside_l_LOC', 4.881, 0.057, -7.24)
     lib.createRenameAndParent(lib.project_Name + '_outside_l_LOC', lib.project_Name + '_inside_l_LOC', -9.208, 0, 0)
     lib.createRenameAndParent(lib.project_Name + '_inside_l_LOC', lib.project_Name + '_ball_l_LOC', 4.327, 2.393, 0)
+    lib.createRenameAndParent(lib.project_Name + '_inside_l_LOC', lib.project_Name + '_toeForward_l_LOC', 4.327, -0.057, 7.24)
     lib.createRenameAndParent(lib.project_Name + '_ball_l_LOC', lib.project_Name + '_ankle_l_LOC', 0, 13.25, -6.05)
 
     cmds.select(d=True)
@@ -75,7 +76,7 @@ def leftLegSetup():
     cmds.parent(lib.project_Name + '_leg_l_rpIK', lib.project_Name + '_leg_l_rpIK_rot')
     cmds.parent(lib.project_Name + '_ankle_l_scIK', lib.project_Name + '_ball_l_scIK', lib.project_Name + '_leg_l_sprIK',
                 lib.project_Name + '_ball_l_LOC')
-    cmds.parent(lib.project_Name + '_toe_l_scIK', lib.project_Name + '_inside_l_LOC')
+    cmds.parent(lib.project_Name + '_toe_l_scIK', lib.project_Name + '_toeForward_l_LOC')
 
     cmds.parentConstraint(lib.project_Name + '_l_leg_03_jc', lib.project_Name + '_ankle_l_LOC', maintainOffset=1)
 
@@ -163,10 +164,7 @@ def leftLegSetup():
     lib.AttrlockAndHide(lib.project_Name + '_l_toe_01_cc', 1, 0, 1)
     lib.AttrlockAndHide(lib.project_Name + '_l_heel_01_cc', 1, 0, 1)
 
-    """cmds.parent(lib.project_Name +'_l_toe_01_cc_off', lib.project_Name +'_l_ball_01_cc')
-    cmds.parent(lib.project_Name +'_l_ball_01_cc_off', lib.project_Name +'_l_ankle_01_cc')
-    cmds.parent(lib.project_Name +'_l_ankle_01_cc_off', lib.project_Name +'_l_heel_01_cc')
-    cmds.parent(lib.project_Name +'_l_heel_01_cc_off', lib.project_Name +'_l_leg_01_cc')"""
+
 
     cmds.select(d=1)
 
@@ -211,6 +209,12 @@ def leftLegSetup():
     cmds.aliasAttr('toe_tilt', lib.project_Name + '_l_toe_01_cc.ry')
     cmds.aliasAttr('toe_lift', lib.project_Name + '_l_toe_01_cc.rz')
 
+    #create toeforward attribute..
+    cmds.select(lib.project_Name + '_l_toe_01_cc')
+    cmds.addAttr(ln="ToeForward",shortName='toeForward', dv=0,k=1,)
+
+
+
     # expressions for ..  [ when using different project name, it should be change in expressions manually ]
     # heel ctrl...
     cmds.expression(s='Ciervo_heel_l_LOC.rotateZ =  (Ciervo_l_heel_01_cc.rotateY)*-1;', n='heel_tilt_l')
@@ -234,6 +238,8 @@ def leftLegSetup():
 
     cmds.expression(s='Ciervo_outside_l_LOC.rotateZ =min(0,Ciervo_l_toe_01_cc.rotateY);', n='toe_outside_l')
     cmds.expression(s='Ciervo_inside_l_LOC.rotateZ =max(0,Ciervo_l_toe_01_cc.rotateY);', n='toe_inside_l')
+    cmds.expression(s='Ciervo_toeForward_l_LOC.translateY = (Ciervo_l_toe_01_cc.ToeForward);', n='toe_forward')
+
 
     cmds.select(d=1)
 
@@ -258,7 +264,7 @@ def leftLegSetup():
     # cmds.parentConstraint( 'hip_l_Ctrl', lib.project_Name +'_l_knee_01_pv', e=True, w=0.8 )
 
     cmds.select(d=1)
-"""    # parent leg components to it relevant project structure
+    # parent leg components to it relevant project structure
 
     cmds.parent(lib.project_Name + '_root_l_LOC', lib.project_Name + '_CR_LOC')
     cmds.hide(lib.project_Name + '_CR_LOC')
@@ -274,4 +280,4 @@ def leftLegSetup():
     cmds.parent(lib.project_Name + '_l_leg_01_cc_off', lib.project_Name + '_l_knee_01_pv_off', lib.project_Name + '_hipCtrl_l_off',
                 lib.project_Name + '_CR_CC')
 
-    cmds.select(d=1)"""
+    cmds.select(d=1)
