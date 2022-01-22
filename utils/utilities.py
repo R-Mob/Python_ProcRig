@@ -1,26 +1,25 @@
 
 import maya.cmds as cmds
 from . import libraries as lib
-project_name = "Ciervo"
 
 
 def projectStructure():
     ### project structure
-    main_grp = cmds.group(n=project_name + '_CR_ALL', em=True)
-    ort_grp = cmds.group(n=project_name + '_CR_ORT', em=True)
-    rot_grp = cmds.group(n=project_name + '_CR_ROT', em=True)
-    scl_grp = cmds.group(n=project_name + '_CR_SCL', em=True)
-    skl_grp = cmds.group(n=project_name + '_CR_SKL', em=True)
-    pp_grp = cmds.group(n=project_name + '_CR_PP', em=True)
-    ik_grp = cmds.group(n=project_name + '_CR_IK', em=True)
-    loc_grp = cmds.group(n=project_name + '_CR_LOC', em=True)
-    cc_grp = cmds.group(n=project_name + '_CR_CC', em=True)
-    geo_grp = cmds.group(n=project_name + '_CR_GEO', em=True)
-    proxy_grp = cmds.group(n=project_name + '_proxy_GEO', em=True)
-    highpoly_grp = cmds.group(n=project_name + '_HighPoly_GEO', em=True)
-    skeleton_grp = cmds.group(n=project_name + '_Anatomy_GEO', em=True)
-    crshp_grp = cmds.group(n=project_name + '_CR_SHP', em=True)
-    xtr_grp = cmds.group(n=project_name + '_CR_XTR', em=True)
+    main_grp = cmds.group(n=lib.project_Name + '_CR_ALL', em=True)
+    ort_grp = cmds.group(n=lib.project_Name + '_CR_ORT', em=True)
+    rot_grp = cmds.group(n=lib.project_Name+ '_CR_ROT', em=True)
+    scl_grp = cmds.group(n=lib.project_Name + '_CR_SCL', em=True)
+    skl_grp = cmds.group(n=lib.project_Name + '_CR_SKL', em=True)
+    pp_grp = cmds.group(n=lib.project_Name + '_CR_PP', em=True)
+    ik_grp = cmds.group(n=lib.project_Name + '_CR_IK', em=True)
+    loc_grp = cmds.group(n=lib.project_Name + '_CR_LOC', em=True)
+    cc_grp = cmds.group(n=lib.project_Name + '_CR_CC', em=True)
+    geo_grp = cmds.group(n=lib.project_Name + '_CR_GEO', em=True)
+    proxy_grp = cmds.group(n=lib.project_Name + '_proxy_GEO', em=True)
+    highpoly_grp = cmds.group(n=lib.project_Name + '_HighPoly_GEO', em=True)
+    skeleton_grp = cmds.group(n=lib.project_Name+ '_Anatomy_GEO', em=True)
+    crshp_grp = cmds.group(n=lib.project_Name + '_CR_SHP', em=True)
+    xtr_grp = cmds.group(n=lib.project_Name + '_CR_XTR', em=True)
 
     cmds.parent(cc_grp, loc_grp, ik_grp, pp_grp)
     cmds.parent(skl_grp, pp_grp, scl_grp)
@@ -103,7 +102,7 @@ def locPlacement():
 
     cmds.parent('spineLocGRP', 'neckLocGRP', 'headLocGRP', 'tailLocGRP', 'backLegLocGRP', 'frontArmLocGRP',
                 'pelvisLocGRP',
-                project_name + '_CR_LOC')
+                lib.project_Name + '_CR_LOC')
 
     cmds.select(d=True)
-    cmds.hide(project_name + '_CR_LOC')
+    cmds.hide(lib.project_Name + '_CR_LOC')

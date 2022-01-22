@@ -1,8 +1,7 @@
 #
 import maya.cmds as cmds
-
-
-#locatorPlacement...
+project_Name = "Ciervo"
+#project name declaration
 
 def LocatorPlacement(locName,x,y,z):
     proxyLoc = cmds.spaceLocator(n=locName)
