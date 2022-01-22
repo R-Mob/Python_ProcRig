@@ -106,3 +106,4 @@ def locPlacement():
                 project_name + '_CR_LOC')
 
     cmds.select(d=True)
+    cmds.hide(project_name + '_CR_LOC')
