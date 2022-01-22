@@ -238,7 +238,7 @@ def leftLegSetup():
 
     cmds.expression(s='Ciervo_outside_l_LOC.rotateZ =min(0,Ciervo_l_toe_01_cc.rotateY);', n='toe_outside_l')
     cmds.expression(s='Ciervo_inside_l_LOC.rotateZ =max(0,Ciervo_l_toe_01_cc.rotateY);', n='toe_inside_l')
-    cmds.expression(s='Ciervo_toeForward_l_LOC.translateY = (Ciervo_l_toe_01_cc.ToeForward);', n='toe_forward')
+    cmds.expression(s='Ciervo_toeForward_l_LOC.translateY = (Ciervo_l_toe_01_cc.ToeForward);', n='toe_forward_l')
 
 
     cmds.select(d=1)

@@ -219,6 +219,21 @@ def jointPlacement():
     cmds.hide(lib.project_Name + '_l_leg_01_jc')
     cmds.parent(lib.project_Name + '_l_leg_01_jc', lib.project_Name + '_CR_SKL')
     cmds.select(d=True)
+    
+    #control joints right leg...
+    
+    new_jnt = cmds.duplicate(lib.project_Name + '_r_leg_02_jj', n=lib.project_Name + '_r_leg_01_jc', parentOnly=1)[0]
+    cmds.parent(new_jnt, w=1)
+    new_jnt1 = cmds.duplicate(lib.project_Name + '_r_leg_03_jj', n=lib.project_Name + '_r_leg_02_jc', parentOnly=1)[0]
+    cmds.parent(new_jnt1)
+    new_jnt2 = cmds.duplicate(lib.project_Name + '_r_leg_04_jj', n=lib.project_Name + '_r_leg_03_jc', parentOnly=1)[0]
+    cmds.parent(new_jnt2)
+    new_jnt3 = cmds.duplicate(lib.project_Name + '_r_leg_05_jj', n=lib.project_Name + '_r_leg_04_jc', parentOnly=1)[0]
+    cmds.parent(new_jnt3)
+
+    cmds.hide(lib.project_Name + '_r_leg_01_jc')
+    cmds.parent(lib.project_Name + '_r_leg_01_jc', lib.project_Name + '_CR_SKL')
+    cmds.select(d=True)
 
 
 
