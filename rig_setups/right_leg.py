@@ -63,7 +63,7 @@ def rightLegSetup():
     lib.createRenameAndParent(lib.project_Name + '_toe_r_LOC', lib.project_Name + '_outside_r_LOC', 4.881, 0.057, -7.24)
     lib.createRenameAndParent(lib.project_Name + '_outside_r_LOC', lib.project_Name + '_inside_r_LOC', -9.208, 0, 0)
     lib.createRenameAndParent(lib.project_Name + '_inside_r_LOC', lib.project_Name + '_ball_r_LOC', 4.327, 2.393, 0)
-    lib.createRenameAndParent(lib.project_Name + '_inside_r_LOC', lib.project_Name + '_toeForward_r_LOC', 4.327, -0.057,7.24)
+    lib.createRenameAndParent(lib.project_Name + '_inside_r_LOC', lib.project_Name + '_toeForward_r_LOC', 4.327, 0,7.24)
     lib.createRenameAndParent(lib.project_Name + '_ball_r_LOC', lib.project_Name + '_ankle_r_LOC', 0, 13.25, -6.05)
 
     cmds.select(d=True)
