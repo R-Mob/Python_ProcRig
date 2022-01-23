@@ -167,7 +167,7 @@ def rightLegSetup():
 
     # Polevector for knee controls....
 
-    lib.controlType('circledArrow', lib.project_Name + '_r_knee_01_pv', 4, lib.project_Name + '_r_knee_01_pv_off')
+    lib.controlType('circledArrow', lib.project_Name + '_r_knee_01_pv', 2, lib.project_Name + '_r_knee_01_pv_off')
 
     cmds.setAttr(lib.project_Name + '_r_knee_01_pv_off' + '.tx', -34.038)
     cmds.setAttr(lib.project_Name + '_r_knee_01_pv_off' + '.ty', 89.358)

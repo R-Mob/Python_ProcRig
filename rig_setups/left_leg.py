@@ -170,7 +170,7 @@ def leftLegSetup():
 
     # Polevector for knee controls....
 
-    lib.controlType('circledArrow', lib.project_Name + '_l_knee_01_pv', 4, lib.project_Name + '_l_knee_01_pv_off')
+    lib.controlType('circledArrow', lib.project_Name + '_l_knee_01_pv', 2, lib.project_Name + '_l_knee_01_pv_off')
 
     cmds.setAttr(lib.project_Name + '_l_knee_01_pv_off' + '.tx', 34.038)
     cmds.setAttr(lib.project_Name + '_l_knee_01_pv_off' + '.ty', 89.358)
@@ -265,7 +265,7 @@ def leftLegSetup():
 
     cmds.parent(lib.project_Name + '_root_l_LOC', lib.project_Name + '_CR_LOC')
     cmds.hide(lib.project_Name + '_CR_LOC')
-    # cmds.hide(lib.project_Name+'_CR_SKL')
+
     cmds.select(d=1)
 
     cmds.parent(lib.project_Name + '_l_knee_01_pvtempCurve', lib.project_Name + '_l_knee_01_pv_clusAHandle'

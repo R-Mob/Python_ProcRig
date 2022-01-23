@@ -204,6 +204,8 @@ def jointPlacement():
                 lib.project_Name + '_c_neck_01_jj', lib.project_Name + '_c_tail_01_jj', lib.project_Name + '_c_head_01_jj',
                 lib.project_Name + '_r_shoulder_01_jj', lib.project_Name + '_r_arm_01_jj', lib.project_Name + '_CR_SKL')
     cmds.select(d=True)
+
+    cmds.hide(lib.project_Name+'_CR_SKL')
     
     #control joints left leg...
 
