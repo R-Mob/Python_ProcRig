@@ -259,9 +259,6 @@ def leftLegSetup():
     cmds.parentConstraint('hip_l_Ctrl', lib.project_Name + '_l_leg_01_jj', mo=1)
     lib.AttrlockAndHide('hip_l_Ctrl', 0, 0, 1)
 
-    # parent contstraint knee ctrl...
-    # cmds.parentConstraint(lib.project_Name +'_l_leg_01_cc','hip_l_Ctrl',lib.project_Name +'_l_knee_01_pv',mo=1, sr=["x","y","z"],w=0.2)
-    # cmds.parentConstraint( 'hip_l_Ctrl', lib.project_Name +'_l_knee_01_pv', e=True, w=0.8 )
 
     cmds.select(d=1)
     # parent leg components to it relevant project structure
