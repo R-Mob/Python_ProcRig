@@ -131,7 +131,7 @@ def leftArmSetup():
     cmds.select(d=True)
 
     cmds.group(n=lib.project_Name +  '_arm_l_rpIK_rot', em=1)
-    cmds.setAttr(lib.project_Name + '_arm_l_rpIK_rot' + '.tx', 14.53)
+    cmds.setAttr(lib.project_Name + '_arm_l_rpIK_rot' + '.tx', 14.22)
     cmds.setAttr(lib.project_Name + '_arm_l_rpIK_rot' + '.ty', 14.1)
     cmds.setAttr(lib.project_Name + '_arm_l_rpIK_rot' + '.tz',33.58)
 
@@ -327,50 +327,3 @@ def leftArmSetup():
 
 
     cmds.select(d=1)
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
