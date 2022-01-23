@@ -63,7 +63,7 @@ def leftLegSetup():
     lib.createRenameAndParent(lib.project_Name + '_toe_l_LOC', lib.project_Name + '_outside_l_LOC', 4.881, 0.057, -7.24)
     lib.createRenameAndParent(lib.project_Name + '_outside_l_LOC', lib.project_Name + '_inside_l_LOC', -9.208, 0, 0)
     lib.createRenameAndParent(lib.project_Name + '_inside_l_LOC', lib.project_Name + '_ball_l_LOC', 4.327, 2.393, 0)
-    lib.createRenameAndParent(lib.project_Name + '_inside_l_LOC', lib.project_Name + '_toeForward_l_LOC', 4.327, -0.057, 7.24)
+    lib.createRenameAndParent(lib.project_Name + '_inside_l_LOC', lib.project_Name + '_toeForward_l_LOC', 4.327, 0, 7.24)
     lib.createRenameAndParent(lib.project_Name + '_ball_l_LOC', lib.project_Name + '_ankle_l_LOC', 0, 13.25, -6.05)
 
     cmds.select(d=True)
@@ -278,3 +278,4 @@ def leftLegSetup():
                 lib.project_Name + '_CR_CC')
 
     cmds.select(d=1)
+
