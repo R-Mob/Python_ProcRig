@@ -101,8 +101,10 @@ def leftClavicleSetup():
 def leftArmSetup():
     # ikHandle creation...
     # springIKHandle for driver joint...
-    cmds.ikHandle(sj=lib.project_Name + '_l_arm_01_jc', ee=lib.project_Name + '_l_arm_04_jc', sol='ikSpringSolver',
-                  n=lib.project_Name + '_arm_l_sprIK', ap=1, snc=1)
+    cmds.ikHandle(sj=lib.project_Name + '_l_arm_01_jc', ee=lib.project_Name + '_l_arm_03_jc', sol='ikSpringSolver',
+                  n=lib.project_Name + '_arm_l_sprIK_01', ap=1, snc=1)
+    cmds.setAttr(lib.project_Name + '_arm_l_sprIK_01'+".twist",180)
+
     # rpIKhandle for driven joint....
     cmds.ikHandle(sj=lib.project_Name + '_l_arm_01_jj', ee=lib.project_Name + '_l_arm_03_jj', sol='ikRPsolver',
                   n=lib.project_Name + '_arm_l_rpIK', ap=1)
@@ -137,11 +139,11 @@ def leftArmSetup():
 
     cmds.parent(lib.project_Name + '_arm_l_rpIK_rot', lib.project_Name + '_ankle_arm_l_LOC')
     cmds.parent(lib.project_Name + '_arm_l_rpIK', lib.project_Name + '_arm_l_rpIK_rot')
-    cmds.parent(lib.project_Name + '_ankle_arm_l_scIK', lib.project_Name +  '_ball_arm_l_scIK', lib.project_Name + '_arm_l_sprIK',
+    cmds.parent(lib.project_Name + '_ankle_arm_l_scIK', lib.project_Name + '_ball_arm_l_scIK', lib.project_Name + '_arm_l_sprIK_01',
                 lib.project_Name + '_ball_arm_l_LOC')
     cmds.parent(lib.project_Name + '_toe_arm_l_scIK', lib.project_Name + '_toeForward_arm_l_LOC')
 
-    cmds.parentConstraint(lib.project_Name + '_l_arm_03_jc', lib.project_Name + '_ankle_arm_l_LOC', maintainOffset=1)
+    cmds.parentConstraint(lib.project_Name + '_l_arm_02_jc', lib.project_Name + '_ankle_arm_l_LOC', maintainOffset=1)
 
     #controls..
     # main ik control...
@@ -229,6 +231,7 @@ def leftArmSetup():
     # parent arm joint to shoulder joint
     cmds.parent(lib.project_Name + '_l_arm_01_jj', lib.project_Name + '_l_shoulder_02_jj')
 
+
     # Polevector for knee controls....
 
     lib.controlType('circledArrow', lib.project_Name + '_l_arm_knee_01_pv', 2, lib.project_Name + '_l_arm_knee_01_pv_off')
@@ -242,7 +245,7 @@ def leftArmSetup():
     cmds.setAttr(lib.project_Name + '_l_arm_knee_01_pv_off' + '.rz', 90)
 
 
-    cmds.poleVectorConstraint(lib.project_Name +'_l_arm_knee_01_pv', lib.project_Name + '_arm_l_sprIK')
+    cmds.poleVectorConstraint(lib.project_Name +'_l_arm_knee_01_pv', lib.project_Name + '_arm_l_sprIK_01')
 
     # knee locating curve...
 
@@ -324,6 +327,9 @@ def leftArmSetup():
     cmds.parent(lib.project_Name  + '_l_arm_knee_01_pv_off', lib.project_Name  + '_CR_CC')
     cmds.parent(lib.project_Name + '_l_arm_01_cc_off', lib.project_Name + '_CR_CC')
 
-
-
     cmds.select(d=1)
+    cmds.group(lib.project_Name + '_l_arm_01_jc',n=lib.project_Name + '_ljc',w=1)
+    cmds.parent(lib.project_Name + '_ljc',lib.project_Name + '_l_shoulder_02_jj')
+    cmds.select(d=1)
+
+

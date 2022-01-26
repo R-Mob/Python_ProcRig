@@ -107,8 +107,11 @@ def rightArmSetup():
     
     # ikHandle creation...
     # springIKHandle for driver joint...
-    cmds.ikHandle(sj=lib.project_Name + '_r_arm_01_jc', ee=lib.project_Name + '_r_arm_04_jc', sol='ikSpringSolver',
+    cmds.ikHandle(sj=lib.project_Name + '_r_arm_01_jc', ee=lib.project_Name + '_r_arm_03_jc', sol='ikSpringSolver',
                   n=lib.project_Name + '_arm_r_sprIK', ap=1, snc=1)
+
+    cmds.setAttr(lib.project_Name + '_arm_r_sprIK' + ".twist", 180)
+
     # rpIKhandle for driven joint....
     cmds.ikHandle(sj=lib.project_Name + '_r_arm_01_jj', ee=lib.project_Name + '_r_arm_03_jj', sol='ikRPsolver',
                   n=lib.project_Name + '_arm_r_rpIK', ap=1)
@@ -156,7 +159,7 @@ def rightArmSetup():
                 lib.project_Name + '_ball_arm_r_LOC')
     cmds.parent(lib.project_Name + '_toe_arm_r_scIK', lib.project_Name + '_toeForward_arm_r_LOC')
 
-    cmds.parentConstraint(lib.project_Name + '_r_arm_03_jc', lib.project_Name + '_ankle_arm_r_LOC', maintainOffset=1)
+    cmds.parentConstraint(lib.project_Name + '_r_arm_02_jc', lib.project_Name + '_ankle_arm_r_LOC', maintainOffset=1)
 
     # controls..
     # main ik control...
@@ -346,5 +349,8 @@ def rightArmSetup():
     cmds.parent(lib.project_Name + '_r_arm_knee_01_pv_off', lib.project_Name + '_CR_CC')
     cmds.parent(lib.project_Name + '_r_arm_01_cc_off', lib.project_Name + '_CR_CC')
 
+    cmds.select(d=1)
+    cmds.group(lib.project_Name + '_r_arm_01_jc', n=lib.project_Name + '_rjc', w=1)
+    cmds.parent(lib.project_Name + '_rjc', lib.project_Name + '_r_shoulder_02_jj')
     cmds.select(d=1)
 
