@@ -185,8 +185,3 @@ def pointingCurve(ctrlname,jointname):
     cmds.parentConstraint(jointname,ctrlname+'_clusAHandle',maintainOffset=0)
     cmds.parentConstraint(ctrlname,ctrlname + '_clusBHandle', maintainOffset=0)
 
-
-
-#ribbon system..
-#param
-

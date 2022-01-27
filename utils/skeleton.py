@@ -238,19 +238,6 @@ def jointPlacement():
     cmds.select(d=True)
     
     #control joints left arm..
-    """
-    lib.LocatorPlacement('arm_l_LOC_JC_01', 15.63, 109.34, 45.5)
-    lib.LocatorPlacement('arm_l_LOC_JC_02', 18.467, 85.1, 47.25)
-    lib.LocatorPlacement('arm_l_LOC_JC_03', 14.22, 14.1, 33.58)
-    cmds.select(d=True)
-
-    cmds.joint(p=(lib.jointAttr('arm_l_LOC_JC_01')),n=lib.project_Name + '_l_arm_01_jc')
-    cmds.setAttr(lib.project_Name + '_l_arm_01_jc'+'.rx',165.043)
-    cmds.setAttr(lib.project_Name + '_l_arm_01_jc' + '.rx', -11.662)
-    cmds.setAttr(lib.project_Name + '_l_arm_01_jc' + '.rx', -24.218)
-    cmds.joint(p=(lib.jointAttr('arm_l_LOC_JC_02')), n=lib.project_Name + '_l_arm_02_jc')
-    cmds.joint(p=(lib.jointAttr('arm_l_LOC_JC_03')), n=lib.project_Name + '_l_arm_03_jc')
-    """
 
     new_jnt = cmds.duplicate(lib.project_Name + '_l_arm_01_jj', n=lib.project_Name + '_l_arm_01_jc', parentOnly=1)[0]
     cmds.parent(new_jnt, w=1)
