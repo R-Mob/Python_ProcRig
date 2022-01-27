@@ -32,11 +32,11 @@ def locPlacement():
     ### locator placement as proxy jnt setup..
     # Spine locators...
     lib.LocatorPlacement('spine_01_LOC_C', 0, 139, -64.74)
-    lib.LocatorPlacement('spine_2_LOC_C', 0, 139.77, -44)
-    lib.LocatorPlacement('spine_3_LOC_C', 0, 138.27, -28.7)
-    lib.LocatorPlacement('spine_4_LOC_C', 0, 136.77, -14.48)
-    lib.LocatorPlacement('spine_5_LOC_C', 0, 133, 4.27)
-    lib.LocatorPlacement('spine_6_LOC_C', 0, 130.8, 25.8)
+    lib.LocatorPlacement('spine_2_LOC_C', 0, 138.838, -46.106)
+    lib.LocatorPlacement('spine_3_LOC_C', 0, 137.69, -29.036)
+    lib.LocatorPlacement('spine_4_LOC_C', 0, 135.745, -11.88)
+    lib.LocatorPlacement('spine_5_LOC_C', 0, 133.216, 6.838)
+    lib.LocatorPlacement('spine_6_LOC_C', 0, 130.304, 28.002)
     lib.LocatorPlacement('spine_7_LOC_C', 0, 127, 51.9)
     spineLocGrp = cmds.group('spine_01_LOC_C', 'spine_2_LOC_C', 'spine_3_LOC_C', 'spine_4_LOC_C', 'spine_5_LOC_C',
                              'spine_6_LOC_C', 'spine_7_LOC_C', n='spineLocGRP')

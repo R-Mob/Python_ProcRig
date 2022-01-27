@@ -328,8 +328,9 @@ def leftArmSetup():
     cmds.parent(lib.project_Name + '_l_arm_01_cc_off', lib.project_Name + '_CR_CC')
 
     cmds.select(d=1)
-    cmds.group(lib.project_Name + '_l_arm_01_jc',n=lib.project_Name + '_ljc',w=1)
-    cmds.parent(lib.project_Name + '_ljc',lib.project_Name + '_l_shoulder_02_jj')
+    cmds.parentConstraint(lib.project_Name + '_l_shoulder_02_jj',lib.project_Name + '_l_arm_01_jc',mo=1)
+    #cmds.group(lib.project_Name + '_l_arm_01_jc',n=lib.project_Name + '_ljc',w=1)
+    #cmds.parent(lib.project_Name + '_ljc',lib.project_Name + '_l_shoulder_02_jj')
     cmds.select(d=1)
 
 
