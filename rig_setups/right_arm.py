@@ -43,9 +43,8 @@ def rightClavicleSetup():
 
     cmds.group('r_scapula_pos_loc', n='right_arm_setup')
     cmds.duplicate('r_scapula_pos_loc', n='r_scapula_up_loc')
-    cmds.setAttr('r_scapula_up_loc' + '.tx', -19.143)
-    cmds.setAttr('r_scapula_up_loc' + '.ty', 104.329)
     cmds.parent('r_scapula_up_loc', 'r_scapula_pos_loc')
+    cmds.setAttr('r_scapula_up_loc' + '.tz', -2.558)
     cmds.duplicate('r_scapula_up_loc', n='r_scapula_aim_loc')
     cmds.setAttr('r_scapula_aim_loc' + '.tx', 0)
     cmds.setAttr('r_scapula_aim_loc' + '.ty', 0)

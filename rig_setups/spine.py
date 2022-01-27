@@ -90,6 +90,8 @@ def ribbonSystemPlacement():
     cmds.delete("spine_proxyRibbon",ch=1)
     cmds.xform("spine_proxyRibbon",cp=1)
 
+    
+
 
 
 
