@@ -31,24 +31,24 @@ def projectStructure():
 def locPlacement():
     ### locator placement as proxy jnt setup..
     # Spine locators...
-    lib.LocatorPlacement('spine_01_LOC_C', 0, 139, -64.74)
-    lib.LocatorPlacement('spine_2_LOC_C', 0, 138.943, -45.941)
-    lib.LocatorPlacement('spine_3_LOC_C', 0, 137.794, -29.046)
-    lib.LocatorPlacement('spine_4_LOC_C', 0, 135.817, -12.087)
-    lib.LocatorPlacement('spine_5_LOC_C', 0, 133.261, 6.514)
-    lib.LocatorPlacement('spine_6_LOC_C', 0, 130.34, 27.703)
-    lib.LocatorPlacement('spine_7_LOC_C', 0, 127, 51.898)
+    lib.LocatorPlacement('spine_01_LOC_C', 0, 139.778, -64.319)
+    lib.LocatorPlacement('spine_2_LOC_C', 0, 142.655, -45.927)
+    lib.LocatorPlacement('spine_3_LOC_C', 0,142.682, -29.915)
+    lib.LocatorPlacement('spine_4_LOC_C', 0, 141.183, -14.534)
+    lib.LocatorPlacement('spine_5_LOC_C', 0, 138.411, 3.95)
+    lib.LocatorPlacement('spine_6_LOC_C', 0, 134.742,27.218)
+    lib.LocatorPlacement('spine_7_LOC_C', 0, 131.272, 51.898)
     spineLocGrp = cmds.group('spine_01_LOC_C', 'spine_2_LOC_C', 'spine_3_LOC_C', 'spine_4_LOC_C', 'spine_5_LOC_C',
                              'spine_6_LOC_C', 'spine_7_LOC_C', n='spineLocGRP')
 
     # Neck locators...
-    lib.LocatorPlacement('neck_1_LOC_C', 0, 127, 51.9)
-    lib.LocatorPlacement('neck_2_LOC_C', 0, 124.06, 58.85)
-    lib.LocatorPlacement('neck_3_LOC_C', 0, 124.4, 65.65)
-    lib.LocatorPlacement('neck_4_LOC_C', 0, 131.86, 72.4)
-    lib.LocatorPlacement('neck_5_LOC_C', 0, 143.3, 73.28)
-    lib.LocatorPlacement('neck_6_LOC_C', 0, 153.49, 72.28)
-    lib.LocatorPlacement('neck_7_LOC_C', 0, 162.7, 73.46)
+    lib.LocatorPlacement('neck_1_LOC_C', 0, 131.272, 51.898)
+    lib.LocatorPlacement('neck_2_LOC_C', 0, 128.355, 58.571)
+    lib.LocatorPlacement('neck_3_LOC_C', 0, 128.046, 65.427)
+    lib.LocatorPlacement('neck_4_LOC_C', 0, 135.195, 69.749)
+    lib.LocatorPlacement('neck_5_LOC_C', 0, 146.494, 71.222)
+    lib.LocatorPlacement('neck_6_LOC_C', 0, 155.78, 71.041)
+    lib.LocatorPlacement('neck_7_LOC_C', 0, 161.856, 71.797)
     lib.LocatorPlacement('neck_8_LOC_C', 0, 167.53, 73.9)
     neckLocGrp = cmds.group('neck_1_LOC_C', 'neck_2_LOC_C', 'neck_3_LOC_C', 'neck_4_LOC_C', 'neck_5_LOC_C',
                             'neck_6_LOC_C', 'neck_7_LOC_C', 'neck_8_LOC_C', n='neckLocGRP')

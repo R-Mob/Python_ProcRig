@@ -120,45 +120,50 @@ def ribbonSystemPlacement():
     cmds.setAttr('temp_spineLattice'+'.rx',-90)
     cmds.setAttr('temp_spineLattice' + '.ry', 90)
     
-    lib.LocatorPlacement('proxy_LOC_C_1', 0, 139, -64.74)
-    lib.LocatorPlacement('proxy_LOC_C_2', 0, 139.77, -44)
-    lib.LocatorPlacement('proxy_LOC_C_3', 0, 138.27, -28.7)
-    lib.LocatorPlacement('proxy_LOC_C_4', 0, 136.77, -14.48)
-    lib.LocatorPlacement('proxy_LOC_C_5', 0, 133, 4.27)
-    lib.LocatorPlacement('proxy_LOC_C_6', 0, 130.8, 25.8)
-    lib.LocatorPlacement('proxy_LOC_C_7', 0, 127, 51.9)
+    lib.LocatorPlacement('proxy_LOC_C_1', 0, 139.778, -64.319)
+    lib.LocatorPlacement('proxy_LOC_C_2',0, 145.585, -45.309)
+    lib.LocatorPlacement('proxy_LOC_C_3', 0,142.117, -24.751)
+    lib.LocatorPlacement('proxy_LOC_C_4',  0, 143.454, -19.866)
+    lib.LocatorPlacement('proxy_LOC_C_5',0, 139.318, -4.267)
+    lib.LocatorPlacement('proxy_LOC_C_6', 0, 133.996, 29.639)
+    lib.LocatorPlacement('proxy_LOC_C_7',0, 131.272, 51.898)
 
     cmds.select('temp_spineLattice.pt[0][0:1][0]', 'temp_spineLattice.pt[0][0:1][1]',r=1)
-    cmds.move(0,127 , -6.419998,r=1)
+    cmds.move(0,131.272003 ,-6.210501,r=1)
 
     cmds.select('temp_spineLattice.pt[1][0:1][0]', 'temp_spineLattice.pt[1][0:1][1]',r=1)
-    cmds.move(0,130.800003 ,  -13.080001,r=1)
+    cmds.move(0, 133.996002 ,-9.1,r=1)
 
     cmds.select('temp_spineLattice.pt[2][0:1][0]', 'temp_spineLattice.pt[2][0:1][1]',r=1)
-    cmds.move(0,133 ,-15.17,r=1)
+    cmds.move(0,139.317993 ,-23.636501,r=1)
 
     cmds.select('temp_spineLattice.pt[3][0:1][0]', 'temp_spineLattice.pt[3][0:1][1]',r=1)
-    cmds.move(0,136.770004 ,-14.48 ,r=1)
+    cmds.move(0, 143.453995 ,-19.865999  ,r=1)
 
     cmds.select('temp_spineLattice.pt[4][0:1][0]', 'temp_spineLattice.pt[4][0:1][1]',r=1)
-    cmds.move(0,138.270004 ,-9.260001 ,r=1)
+    cmds.move(0,142.117004, -5.381501,r=1)
 
     cmds.select('temp_spineLattice.pt[5][0:1][0]', 'temp_spineLattice.pt[5][0:1][1]',r=1)
-    cmds.move(0,139.770004, -5.12 ,r=1)
+    cmds.move(0,145.585007, -6.569998,r=1)
 
     cmds.select('temp_spineLattice.pt[6][0:1][0]', 'temp_spineLattice.pt[6][0:1][1]',r=1)
-    cmds.move(0,139, -6.419998 ,r=1)
-
+    cmds.move(0,139.778 ,-6.2105 ,r=1)
+    
     a = cmds.ls('proxy_*')
     cmds.delete(a)
 
     cmds.delete("spine_proxyRibbon",ch=1)
     cmds.xform("spine_proxyRibbon",cp=1)
-    
+
     #creating ik curve...
-    cmds.curve(p=[[0.0, 139.0, -64.74], [0.0, 139.018, -58.394], [0.0, 139.055, -45.702], [-0.0, 137.809, -29.089],
-                  [-0.0, 135.849, -12.158], [-0.0, 133.264, 6.442], [-0.0, 130.39, 27.417], [-0.0, 128.13, 43.739],
-                  [-0.0, 127.0, 51.9]],d=3,n='spine_ik_curve')
+    #cmds.curve(p=[[0.0, 139.0, -64.74], [0.0, 139.018, -58.394], [0.0, 139.055, -45.702], [-0.0, 137.809, -29.089],
+                #  [-0.0, 135.849, -12.158], [-0.0, 133.264, 6.442], [-0.0, 130.39, 27.417], [-0.0, 128.13, 43.739],
+                #  [-0.0, 127.0, 51.9]],d=3,n='spine_ik_curve')
+
+    cmds.curve(p=[[0.0, 139.778, -64.319], [0.0, 140.962, -58.003], [0.0, 143.329, -45.372], [-0.0, 142.837, -29.757],
+                 [-0.0, 141.415, -15.091], [-0.0, 138.602, 2.917], [-0.0, 134.645, 27.123], [-0.0, 132.396, 43.64],
+                 [0.0, 131.272, 51.898]],d=3,n='spine_ik_curve')
+
     cmds.delete("spine_ik_curve", ch=1)
     cmds.xform("spine_ik_curve", cp=1)
     #creating IKSpline Handle...
@@ -172,11 +177,11 @@ def ribbonSystemPlacement():
     cmds.joint(p=(lib.jointAttr('spine_4_LOC_C')), n=lib.project_Name + '_c_spine_02_jc')
     cmds.select(d=1)
     cmds.joint(p=(lib.jointAttr('spine_7_LOC_C')), n=lib.project_Name + '_c_spine_03_jc')
-
+    
     cmds.select(d=1)
     #skin bind jc to ikCurve...
     cmds.skinCluster(lib.project_Name + '_c_spine_01_jc',lib.project_Name + '_c_spine_02_jc',lib.project_Name + '_c_spine_03_jc',"spine_ik_curve", n='cluster_jc', tsb=True,bm=0, sm=0,nw=1)
-
+    
     # skin bind jj to ribbon...
     cmds.skinCluster(lib.project_Name + '_c_spine_01_jj',lib.project_Name + '_c_spine_02_jj',lib.project_Name + '_c_spine_03_jj',lib.project_Name + '_c_spine_04_jj',lib.project_Name + '_c_spine_05_jj',lib.project_Name + '_c_spine_06_jj',lib.project_Name + '_c_spine_07_je',"spine_proxyRibbon", n='cluster_ribbon', tsb=True,bm=0, sm=0,nw=1)
 
