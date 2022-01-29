@@ -41,6 +41,7 @@ def AttrlockAndHide(ctrlName,t,r,s):
 def controlType( ctrlType,ctrlName,scale,parentGrpName):
     if ctrlType == 'circle':
         circleCtrl = cmds.circle(n = ctrlName)
+
         cmds.scale(scale,scale,scale,circleCtrl[0]+'.cv[0:7]')
         cmds.group(ctrlName,n=parentGrpName)
     #custom controllers
@@ -129,6 +130,7 @@ def controlType( ctrlType,ctrlName,scale,parentGrpName):
                     [0.0, -0.399, -1.992], [0.889, 0.167, -1.333], [0.444, 0.167, -1.333], [0.444, 0.335, -0.889],
                     [0.444, 0.399, -0.444], [0.889, 0.335, -0.444], [1.333, 0.167, -0.444], [1.333, 0.167, -0.889],
                     [1.992, -0.399, 0.0]], d=1,n = ctrlName)
+
         cmds.scale(scale, scale, scale, curvedFourArrow + '.cv[0:32]')
         cmds.group(ctrlName, n=parentGrpName)
 
@@ -157,6 +159,7 @@ def controlType( ctrlType,ctrlName,scale,parentGrpName):
                  [0.684, 0.0, -1.357], [0.005, 0.0, -2.0], [-0.666, 0.0, -1.357], [-0.352, 0.0, -1.357],
                  [-0.352, 0.0, -1.099], [-0.674, 0.0, -0.935], [-0.93, 0.0, -0.679], [-1.094, 0.0, -0.357],
                  [-1.486, 0.0, -0.357], [-1.486, 0.0, -0.679], [-2.117, 0.0, 0.0]], d=1,n = ctrlName)
+
         cmds.scale(scale, scale, scale, circleFourArrow + '.cv[0:36]')
         cmds.group(ctrlName, n=parentGrpName)
 
@@ -164,11 +167,11 @@ def controlType( ctrlType,ctrlName,scale,parentGrpName):
         singleArrow = cmds.curve(p=[[-0.0, 0.0, -2.002], [1.601, -0.0, -0.4], [0.801, 0.0, -0.4], [0.801, 0.0, 2.002], [-0.801, 0.0, 2.002],
                [-0.801, -0.0, -0.4], [-1.601, 0.0, -0.4], [-0.0, 0.0, -2.002]], d=1,n = ctrlName)
         cmds.scale(scale, scale, scale, singleArrow + '.cv[0:7]')
+
         cmds.group(ctrlName, n=parentGrpName)
 
 
 #locator parenting...
-
 def createRenameAndParent(locName1,newName1,x1,y1,z1):
     temp1 = cmds.spaceLocator(locName1)
     cmds.rename(temp1, newName1)
@@ -185,3 +188,27 @@ def pointingCurve(ctrlname,jointname):
     cmds.parentConstraint(jointname,ctrlname+'_clusAHandle',maintainOffset=0)
     cmds.parentConstraint(ctrlname,ctrlname + '_clusBHandle', maintainOffset=0)
 
+"""# nurbs color..
+def ControlColor(ctrlname , colorname):
+    cmds.setAttr(ctrlname+"Shape.overrideEnabled", 1)
+    if colorname == 'yellow':
+        cmds.setAttr(ctrlname+'Shape.overrideColor', 18)
+    elif colorname == 'canary':
+        cmds.setAttr(ctrlname + 'Shape.overrideColor', 21)
+    elif colorname == 'flaxen':
+        cmds.setAttr(ctrlname + 'Shape.overrideColor', 20)
+    elif colorname == 'red':
+        cmds.setAttr(ctrlname + 'Shape.overrideColor', 13)
+    elif colorname == 'crimson':
+        cmds.setAttr(ctrlname + 'Shape.overrideColor', 12)
+    elif colorname == 'apple':
+        cmds.setAttr(ctrlname + 'Shape.overrideColor', 4)
+    elif colorname == 'green':
+        cmds.setAttr(ctrlname + 'Shape.overrideColor', 19)
+    elif colorname == 'lime':
+        cmds.setAttr(ctrlname + 'Shape.overrideColor', 18)
+    elif colorname == 'blue':
+        cmds.setAttr(ctrlname + 'Shape.overrideColor', 15)
+
+
+"""

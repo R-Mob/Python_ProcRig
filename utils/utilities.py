@@ -32,12 +32,12 @@ def locPlacement():
     ### locator placement as proxy jnt setup..
     # Spine locators...
     lib.LocatorPlacement('spine_01_LOC_C', 0, 139, -64.74)
-    lib.LocatorPlacement('spine_2_LOC_C', 0, 138.838, -46.106)
-    lib.LocatorPlacement('spine_3_LOC_C', 0, 137.69, -29.036)
-    lib.LocatorPlacement('spine_4_LOC_C', 0, 135.745, -11.88)
-    lib.LocatorPlacement('spine_5_LOC_C', 0, 133.216, 6.838)
-    lib.LocatorPlacement('spine_6_LOC_C', 0, 130.304, 28.002)
-    lib.LocatorPlacement('spine_7_LOC_C', 0, 127, 51.9)
+    lib.LocatorPlacement('spine_2_LOC_C', 0, 138.943, -45.941)
+    lib.LocatorPlacement('spine_3_LOC_C', 0, 137.794, -29.046)
+    lib.LocatorPlacement('spine_4_LOC_C', 0, 135.817, -12.087)
+    lib.LocatorPlacement('spine_5_LOC_C', 0, 133.261, 6.514)
+    lib.LocatorPlacement('spine_6_LOC_C', 0, 130.34, 27.703)
+    lib.LocatorPlacement('spine_7_LOC_C', 0, 127, 51.898)
     spineLocGrp = cmds.group('spine_01_LOC_C', 'spine_2_LOC_C', 'spine_3_LOC_C', 'spine_4_LOC_C', 'spine_5_LOC_C',
                              'spine_6_LOC_C', 'spine_7_LOC_C', n='spineLocGRP')
 
@@ -106,3 +106,26 @@ def locPlacement():
 
     cmds.select(d=True)
     cmds.hide(lib.project_Name + '_CR_LOC')
+
+def globalController():
+    lib.controlType('circleFourArrow',lib.project_Name +'_Translation_cc',80,lib.project_Name +'_Translation_cc_off')
+    cmds.setAttr(lib.project_Name +'_Translation_cc_off'+'.tz',-10)
+    lib.controlType('circle', lib.project_Name + '_Scale_cc', 70, lib.project_Name + '_Scale_cc_off')
+    cmds.setAttr(lib.project_Name + '_Scale_cc' + '.rx', 90)
+    cmds.select(d=True)
+    cmds.makeIdentity(lib.project_Name + '_Scale_cc',apply=1,t=1,r=1,s=1,n=0,pn=1)
+    cmds.setAttr(lib.project_Name + '_Scale_cc_off' + '.tz', -10)
+    cmds.select(d=True)
+    cmds.parent(lib.project_Name + '_Scale_cc_off',lib.project_Name +'_Translation_cc')
+    cmds.parent(lib.project_Name + '_Translation_cc_off',lib.project_Name +'_CR_ALL' )
+    cmds.select(d=True)
+    cmds.parentConstraint(lib.project_Name + '_Scale_cc',lib.project_Name + '_CR_ORT',mo=1)
+    cmds.scaleConstraint(lib.project_Name + '_Scale_cc', lib.project_Name + '_CR_SCL', mo=1)
+
+
+
+
+
+
+
+
