@@ -154,38 +154,79 @@ def ribbonSystemPlacement():
 
     cmds.delete("spine_proxyRibbon",ch=1)
     cmds.xform("spine_proxyRibbon",cp=1)
-
+def spineSetup():
     #creating ik curve...
-    #cmds.curve(p=[[0.0, 139.0, -64.74], [0.0, 139.018, -58.394], [0.0, 139.055, -45.702], [-0.0, 137.809, -29.089],
-                #  [-0.0, 135.849, -12.158], [-0.0, 133.264, 6.442], [-0.0, 130.39, 27.417], [-0.0, 128.13, 43.739],
-                #  [-0.0, 127.0, 51.9]],d=3,n='spine_ik_curve')
 
-    cmds.curve(p=[[0.0, 139.778, -64.319], [0.0, 140.962, -58.003], [0.0, 143.329, -45.372], [-0.0, 142.837, -29.757],
-                 [-0.0, 141.415, -15.091], [-0.0, 138.602, 2.917], [-0.0, 134.645, 27.123], [-0.0, 132.396, 43.64],
-                 [0.0, 131.272, 51.898]],d=3,n='spine_ik_curve')
-
-    cmds.delete("spine_ik_curve", ch=1)
-    cmds.xform("spine_ik_curve", cp=1)
-    #creating IKSpline Handle...
-    cmds.ikHandle(sj =lib.project_Name+'_c_spine_01_jj', ee=lib.project_Name+'_c_spine_07_je',c='spine_ik_curve',ccv=0,
-                  pcv=0 ,snc=0, n = lib.project_Name+'_spine_spIK',sol = 'ikSplineSolver')
+    cmds.ikHandle(sj=lib.project_Name + '_c_spine_01_jj', ee=lib.project_Name + '_c_spine_07_je',ccv=1,
+                  pcv=0, snc=0,scv=0, n=lib.project_Name + '_spine_spIK', sol='ikSplineSolver')
+    cmds.rename("curve1","spine_ik_curve")
     cmds.select(d=1)
-
     #creating control joints...
     cmds.joint(p=(lib.jointAttr('spine_01_LOC_C')), n=lib.project_Name + '_c_spine_01_jc')
     cmds.select(d=1)
     cmds.joint(p=(lib.jointAttr('spine_4_LOC_C')), n=lib.project_Name + '_c_spine_02_jc')
     cmds.select(d=1)
     cmds.joint(p=(lib.jointAttr('spine_7_LOC_C')), n=lib.project_Name + '_c_spine_03_jc')
-    
+
     cmds.select(d=1)
     #skin bind jc to ikCurve...
     cmds.skinCluster(lib.project_Name + '_c_spine_01_jc',lib.project_Name + '_c_spine_02_jc',lib.project_Name + '_c_spine_03_jc',"spine_ik_curve", n='cluster_jc', tsb=True,bm=0, sm=0,nw=1)
     
     # skin bind jj to ribbon...
     cmds.skinCluster(lib.project_Name + '_c_spine_01_jj',lib.project_Name + '_c_spine_02_jj',lib.project_Name + '_c_spine_03_jj',lib.project_Name + '_c_spine_04_jj',lib.project_Name + '_c_spine_05_jj',lib.project_Name + '_c_spine_06_jj',lib.project_Name + '_c_spine_07_je',"spine_proxyRibbon", n='cluster_ribbon', tsb=True,bm=0, sm=0,nw=1)
-
+    cmds.select(d=1)
     #spine controllers...
+
+    lib.controlType('hipctrl', lib.project_Name + '_c_hip_01_cc',1, lib.project_Name + '_c_hip_01_cc_off')
+
+    cmds.setAttr(lib.project_Name + '_c_hip_01_cc_off' + '.tx', 0)
+    cmds.setAttr(lib.project_Name + '_c_hip_01_cc_off' + '.ty',116.48)
+    cmds.setAttr(lib.project_Name + '_c_hip_01_cc_off' + '.tz', -51.511)
+
+    cmds.move(0 ,139.778 ,-64.319 , lib.project_Name + '_c_hip_01_cc' + '.scalePivot',
+              lib.project_Name + '_c_hip_01_cc' + '.rotatePivot', absolute=True)
+    cmds.select(d=1)
+    lib.controlType('flankctrl', lib.project_Name + '_c_flank_01_cc',1, lib.project_Name + '_c_flank_01_cc_off')
+
+    cmds.setAttr(lib.project_Name + '_c_flank_01_cc_off' + '.tx', 0)
+    cmds.setAttr(lib.project_Name + '_c_flank_01_cc_off' + '.ty',115.236)
+    cmds.setAttr(lib.project_Name + '_c_flank_01_cc_off' + '.tz', -7.967)
+
+    cmds.move( 0 ,141.182999, -14.534 , lib.project_Name + '_c_flank_01_cc' + '.scalePivot',
+              lib.project_Name + '_c_flank_01_cc' + '.rotatePivot', absolute=True)
+    cmds.select(d=1)
+    lib.controlType('chestctrl', lib.project_Name + '_c_chest_01_cc', 1, lib.project_Name + '_c_chest_01_cc_off')
+
+    cmds.setAttr(lib.project_Name + '_c_chest_01_cc_off' + '.tx', 0)
+    cmds.setAttr(lib.project_Name + '_c_chest_01_cc_off' + '.ty', 118.155)
+    cmds.setAttr(lib.project_Name + '_c_chest_01_cc_off' + '.tz',39.346)
+    cmds.setAttr(lib.project_Name + '_c_chest_01_cc_off' + '.rx', 3.534)
+
+    cmds.move(0, 134.74144 ,27.218098 ,lib.project_Name + '_c_chest_01_cc' + '.scalePivot',
+              lib.project_Name + '_c_chest_01_cc' + '.rotatePivot', absolute=True)
+    cmds.select(d=1)
+
+
+    #connecting attributes...
+
+    cmds.createNode('multiplyDivide', n='spine_twist_multi')
+    cmds.connectAttr('Ciervo_c_spine_01_jc.rotateZ', 'spine_twist_multi.i1z')
+    cmds.connectAttr('Ciervo_c_spine_01_jc.rotateZ', 'Ciervo_spine_spIK.roll')
+    cmds.setAttr('spine_twist_multi'+'.i2z',-1)
+
+    cmds.createNode('plusMinusAverage',n='spine_twist_pma')
+
+    cmds.connectAttr('Ciervo_c_spine_03_jc.rotateZ','spine_twist_pma.input1D[0]')
+    cmds.connectAttr('spine_twist_multi.output.outputZ','spine_twist_pma.input1D[1]')
+
+    cmds.connectAttr('spine_twist_pma.output1D','Ciervo_spine_spIK.twist')
+
+    #parenting jc to spine controls...
+    cmds.parentConstraint(lib.project_Name +  '_c_chest_01_cc' ,lib.project_Name + '_c_spine_03_jc', maintainOffset=1)
+    cmds.parentConstraint(lib.project_Name +  '_c_flank_01_cc',lib.project_Name + '_c_spine_02_jc',maintainOffset=1)
+    cmds.parentConstraint(lib.project_Name + '_c_hip_01_cc', lib.project_Name + '_c_spine_01_jc',maintainOffset=1)
+
+
 
 
 
