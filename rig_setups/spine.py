@@ -3,51 +3,12 @@ import maya.mel as mel
 from utils import libraries as lib
 from utils import utilities as util
 from utils import skeleton as skel
-
-def skinToSpine():
-    spine = ['sacrum_C', 'thoriac_vertibrae_C19_C', 'thoriac_vertibrae_C18_C', 'thoriac_vertibrae_C17_C',
-             'thoriac_vertibrae_C16_C', 'thoriac_vertibrae_C15_C', 'thoriac_vertibrae_C14_C',
-             'thoriac_vertibrae_C13_C', 'thoriac_vertibrae_C12_C', 'thoriac_vertibrae_C11_C', 'thoriac_vertibrae_C10_C',
-             'rib_13_L', 'rib_12_L','rib_11_L', 'rib_10_L','sternocostal_13_L' ,'sternocostal_12_L','sternocostal_11_L',
-             'sternocostal_10_L','sternocostal_13_R' ,'sternocostal_12_R','sternocostal_11_R',
-             'sternocostal_10_R',
-             'rib_13_R', 'rib_12_R', 'rib_11_R', 'rib_10_R', 'thoriac_vertibrae_C09_C','thoriac_vertibrae_C08_C',
-             'thoriac_vertibrae_C07_C', 'thoriac_vertibrae_C06_C', 'rib_09_L', 'rib_08_L', 'rib_07_L', 'rib_06_L','rib_09_R', 'rib_08_R',
-             'rib_07_R', 'rib_06_R','sternocostal_09_L' ,'sternocostal_08_L','sternocostal_07_L',
-             'sternocostal_06_L','sternocostal_09_R' ,'sternocostal_08_R','sternocostal_07_R',
-             'sternocostal_06_R','sternum_09_C' ,'sternum_08_C' ,'sternum_07_C' ,'sternum_06_C' ,'thoriac_vertibrae_C05_C',
-             'thoriac_vertibrae_C04_C', 'thoriac_vertibrae_C03_C',
-             'thoriac_vertibrae_C02_C', 'thoriac_vertibrae_C01_C', 'rib_05_L', 'rib_04_L', 'rib_03_L', 'rib_02_L',
-             'rib_01_L', 'rib_05_R', 'rib_04_R', 'rib_03_R', 'rib_02_R', 'rib_01_R','sternocostal_05_L','sternocostal_04_L',
-             'sternocostal_03_L','sternocostal_02_L','sternocostal_01_L','sternocostal_05_R','sternocostal_04_R',
-             'sternocostal_03_R','sternocostal_02_R','sternocostal_01_R','sternum_05_C','sternum_04_C','sternum_03_C',
-             'sternum_02_C','sternum_01_C']
-    for i in range(81):
-
-        if i < 1:
-            cmds.skinCluster(lib.project_Name + '_c_spine_01_jj', spine[i], n=spine[i] + '_cluster', tsb=True, bm=0, sm=0,
-                             nw=1)
-        elif i > 0 and i < 4:
-            cmds.skinCluster(lib.project_Name + '_c_spine_02_jj', spine[i], n=spine[i] + '_cluster', tsb=True, bm=0, sm=0,
-                             nw=1)
-        elif i > 3 and i < 7:
-            cmds.skinCluster(lib.project_Name + '_c_spine_03_jj', spine[i], n=spine[i] + '_cluster', tsb=True, bm=0, sm=0,
-                             nw=1)
-        elif i > 6 and i < 27:
-            cmds.skinCluster(lib.project_Name + '_c_spine_04_jj', spine[i], n=spine[i] + '_cluster', tsb=True, bm=0, sm=0,
-                             nw=1)
-        elif i > 26 and i < 51:
-            cmds.skinCluster(lib.project_Name + '_c_spine_05_jj', spine[i], n=spine[i] + '_cluster', tsb=True, bm=0, sm=0,
-                             nw=1)
-        elif i > 50 and i < 81:
-            cmds.skinCluster(lib.project_Name + '_c_spine_06_jj', spine[i], n=spine[i] + '_cluster', tsb=True, bm=0, sm=0,
-                             nw=1)
-
-    cmds.select(d=1)
+name = "spine_"
 
 
 
 def ribbonSystemSpine():
+
     #length of spine ribbon..
     temp1 = cmds.getAttr('spine_7_LOC_C'+'.tz')
     temp2 = cmds.getAttr('spine_01_LOC_C' + '.tz')
@@ -72,44 +33,44 @@ def ribbonSystemSpine():
         cmds.rename(rename[j],"SpineFollicle_01")
 
     #creating jj joints inside folicles..
-    cmds.joint(p=(lib.jointAttr("SpineFollicle_01")),n="folicle_01_jj")
-    cmds.parent("folicle_01_jj","SpineFollicle_01")
-    
-    cmds.joint(p=(lib.jointAttr("SpineFollicle_02")),n="folicle_02_jj")
-    cmds.parent("folicle_02_jj","SpineFollicle_02")
-    
-    cmds.joint(p=(lib.jointAttr("SpineFollicle_03")),n="folicle_03_jj")
-    cmds.parent("folicle_03_jj","SpineFollicle_03")
-    
-    cmds.joint(p=(lib.jointAttr("SpineFollicle_04")),n="folicle_04_jj")
-    cmds.parent("folicle_04_jj","SpineFollicle_04")
-    
-    cmds.joint(p=(lib.jointAttr("SpineFollicle_05")),n="folicle_05_jj")
-    cmds.parent("folicle_05_jj","SpineFollicle_05")
-    
-    cmds.joint(p=(lib.jointAttr("SpineFollicle_06")),n="folicle_06_jj")
-    cmds.parent("folicle_06_jj","SpineFollicle_06")
+    cmds.joint(p=(lib.jointAttr("SpineFollicle_01")),n=name+"folicle_01_jj")
+    cmds.parent(name+"folicle_01_jj","SpineFollicle_01")
 
-    cmds.joint(p=(lib.jointAttr("SpineFollicle_07")), n="folicle_07_jj")
-    cmds.parent("folicle_07_jj", "SpineFollicle_07")
-    
-    cmds.joint(p=(lib.jointAttr("SpineFollicle_08")),n="folicle_08_jj")
-    cmds.parent("folicle_08_jj","SpineFollicle_08")
+    cmds.joint(p=(lib.jointAttr("SpineFollicle_02")),n=name+"folicle_02_jj")
+    cmds.parent(name+"folicle_02_jj","SpineFollicle_02")
 
-    cmds.joint(p=(lib.jointAttr("SpineFollicle_09")), n="folicle_09_jj")
-    cmds.parent("folicle_09_jj", "SpineFollicle_09")
+    cmds.joint(p=(lib.jointAttr("SpineFollicle_03")),n=name+"folicle_03_jj")
+    cmds.parent(name+"folicle_03_jj","SpineFollicle_03")
 
-    cmds.joint(p=(lib.jointAttr("SpineFollicle_10")), n="folicle_10_jj")
-    cmds.parent("folicle_10_jj", "SpineFollicle_10")
+    cmds.joint(p=(lib.jointAttr("SpineFollicle_04")),n=name+"folicle_04_jj")
+    cmds.parent(name+"folicle_04_jj","SpineFollicle_04")
 
-    cmds.joint(p=(lib.jointAttr("SpineFollicle_11")), n="folicle_11_jj")
-    cmds.parent("folicle_11_jj", "SpineFollicle_11")
+    cmds.joint(p=(lib.jointAttr("SpineFollicle_05")),n=name+"folicle_05_jj")
+    cmds.parent(name+"folicle_05_jj","SpineFollicle_05")
 
-    cmds.joint(p=(lib.jointAttr("SpineFollicle_12")), n="folicle_12_jj")
-    cmds.parent("folicle_12_jj", "SpineFollicle_12")
+    cmds.joint(p=(lib.jointAttr("SpineFollicle_06")),n=name+"folicle_06_jj")
+    cmds.parent(name+"folicle_06_jj","SpineFollicle_06")
 
-    cmds.joint(p=(lib.jointAttr("SpineFollicle_13")), n="folicle_13_jj")
-    cmds.parent("folicle_13_jj", "SpineFollicle_13")
+    cmds.joint(p=(lib.jointAttr("SpineFollicle_07")), n=name+"folicle_07_jj")
+    cmds.parent(name+"folicle_07_jj", "SpineFollicle_07")
+
+    cmds.joint(p=(lib.jointAttr("SpineFollicle_08")),n=name+"folicle_08_jj")
+    cmds.parent(name+"folicle_08_jj","SpineFollicle_08")
+
+    cmds.joint(p=(lib.jointAttr("SpineFollicle_09")), n=name+"folicle_09_jj")
+    cmds.parent(name+"folicle_09_jj", "SpineFollicle_09")
+
+    cmds.joint(p=(lib.jointAttr("SpineFollicle_10")), n=name+"folicle_10_jj")
+    cmds.parent(name+"folicle_10_jj", "SpineFollicle_10")
+
+    cmds.joint(p=(lib.jointAttr("SpineFollicle_11")), n=name+"folicle_11_jj")
+    cmds.parent(name+"folicle_11_jj", "SpineFollicle_11")
+
+    cmds.joint(p=(lib.jointAttr("SpineFollicle_12")), n=name+"folicle_12_jj")
+    cmds.parent(name+"folicle_12_jj", "SpineFollicle_12")
+
+    cmds.joint(p=(lib.jointAttr("SpineFollicle_13")), n=name+"folicle_13_jj")
+    cmds.parent(name+"folicle_13_jj", "SpineFollicle_13")
 
     cmds.select(d=1)
 
@@ -119,41 +80,42 @@ def ribbonSystemPlacement():
     cmds.lattice(dv = (7,2,2),oc=1,ldv = (14,2,2) ,ol =1,n="temp_spine")
     cmds.setAttr('temp_spineLattice'+'.rx',-90)
     cmds.setAttr('temp_spineLattice' + '.ry', 90)
-    
+    cmds.select(d=1)
     lib.LocatorPlacement('proxy_LOC_C_1', 0, 139.778, -64.319)
-    lib.LocatorPlacement('proxy_LOC_C_2',0, 145.585, -45.309)
-    lib.LocatorPlacement('proxy_LOC_C_3', 0,142.117, -24.751)
-    lib.LocatorPlacement('proxy_LOC_C_4',  0, 143.454, -19.866)
-    lib.LocatorPlacement('proxy_LOC_C_5',0, 139.318, -4.267)
-    lib.LocatorPlacement('proxy_LOC_C_6', 0, 133.996, 29.639)
-    lib.LocatorPlacement('proxy_LOC_C_7',0, 131.272, 51.898)
+    lib.LocatorPlacement('proxy_LOC_C_2',0, 147.222, -5.085)
+    lib.LocatorPlacement('proxy_LOC_C_3', 0,133.587, 11.127)
+    lib.LocatorPlacement('proxy_LOC_C_4',  0,134.148, 17.847)
+    lib.LocatorPlacement('proxy_LOC_C_5',0, 135.571, 24.993)
+    lib.LocatorPlacement('proxy_LOC_C_6', 0, 136.236,45.207)
+    lib.LocatorPlacement('proxy_LOC_C_7',0, 132.777, 48.96)
 
     cmds.select('temp_spineLattice.pt[0][0:1][0]', 'temp_spineLattice.pt[0][0:1][1]',r=1)
-    cmds.move(0,131.272003 ,-6.210501,r=1)
+    cmds.move(0,132.776993, -7.681,r=1)
 
     cmds.select('temp_spineLattice.pt[1][0:1][0]', 'temp_spineLattice.pt[1][0:1][1]',r=1)
-    cmds.move(0, 133.996002 ,-9.1,r=1)
+    cmds.move(0,  136.236,7.447,r=1)
 
     cmds.select('temp_spineLattice.pt[2][0:1][0]', 'temp_spineLattice.pt[2][0:1][1]',r=1)
-    cmds.move(0,139.317993 ,-23.636501,r=1)
+    cmds.move(0,135.571,6.113,r=1)
 
     cmds.select('temp_spineLattice.pt[3][0:1][0]', 'temp_spineLattice.pt[3][0:1][1]',r=1)
-    cmds.move(0, 143.453995 ,-19.865999  ,r=1)
+    cmds.move(0, 134.148, 17.847 ,r=1)
 
     cmds.select('temp_spineLattice.pt[4][0:1][0]', 'temp_spineLattice.pt[4][0:1][1]',r=1)
-    cmds.move(0,142.117004, -5.381501,r=1)
+    cmds.move(0,133.587,30.007,r=1)
 
     cmds.select('temp_spineLattice.pt[5][0:1][0]', 'temp_spineLattice.pt[5][0:1][1]',r=1)
-    cmds.move(0,145.585007, -6.569998,r=1)
+    cmds.move(0,147.222, 32.675 ,r=1)
 
     cmds.select('temp_spineLattice.pt[6][0:1][0]', 'temp_spineLattice.pt[6][0:1][1]',r=1)
-    cmds.move(0,139.778 ,-6.2105 ,r=1)
+    cmds.move(0, 139.778 ,-7.68,r=1)
     
     a = cmds.ls('proxy_*')
     cmds.delete(a)
-
+    cmds.select(d=1)
     cmds.delete("spine_proxyRibbon",ch=1)
     cmds.xform("spine_proxyRibbon",cp=1)
+
 def spineSetup():
     #creating ik curve...
 
@@ -168,7 +130,7 @@ def spineSetup():
     cmds.select(d=1)
     cmds.joint(p=(lib.jointAttr('spine_7_LOC_C')), n=lib.project_Name + '_c_spine_03_jc')
 
-    cmds.select(d=1)
+
     #skin bind jc to ikCurve...
     cmds.skinCluster(lib.project_Name + '_c_spine_01_jc',lib.project_Name + '_c_spine_02_jc',lib.project_Name + '_c_spine_03_jc',"spine_ik_curve", n='cluster_jc', tsb=True,bm=0, sm=0,nw=1)
     
@@ -226,6 +188,84 @@ def spineSetup():
     cmds.parentConstraint(lib.project_Name +  '_c_flank_01_cc',lib.project_Name + '_c_spine_02_jc',maintainOffset=1)
     cmds.parentConstraint(lib.project_Name + '_c_hip_01_cc', lib.project_Name + '_c_spine_01_jc',maintainOffset=1)
 
+def skinToSpine():
+
+
+
+    spine = ['sacrum_C',#1
+
+             'thoriac_vertibrae_C19_C', 'thoriac_vertibrae_C18_C', 'thoriac_vertibrae_C17_C',#3
+
+             'thoriac_vertibrae_C16_C', 'thoriac_vertibrae_C15_C', 'thoriac_vertibrae_C14_C',#6
+
+             'thoriac_vertibrae_C13_C', 'thoriac_vertibrae_C12_C', 'rib_13_L','rib_12_L','rib_13_R', 'rib_12_R',
+             'sternocostal_13_L','sternocostal_12_L','sternocostal_13_R' ,'sternocostal_12_R',#16
+
+             'thoriac_vertibrae_C11_C', 'thoriac_vertibrae_C10_C','rib_11_L', 'rib_10_L','rib_11_R', 'rib_10_R',
+             'sternocostal_10_L','sternocostal_11_L','sternocostal_10_R','sternocostal_11_R',#26
+
+             'thoriac_vertibrae_C09_C', 'thoriac_vertibrae_C08_C', 'rib_08_L', 'rib_09_L', 'rib_08_R', 'rib_09_R',
+             'sternocostal_09_L', 'sternocostal_08_L','sternocostal_09_R' ,'sternocostal_08_R','sternum_09_C' ,
+             'sternum_08_C', #38
+
+             'thoriac_vertibrae_C07_C', 'rib_07_L','rib_07_R','sternum_07_C','sternocostal_07_L','sternocostal_07_R',#44
+
+             'thoriac_vertibrae_C06_C', 'rib_06_L', 'rib_06_R', 'sternum_06_C','sternocostal_06_L','sternocostal_06_R', # 50
+
+             'thoriac_vertibrae_C05_C', 'rib_05_L', 'rib_05_R', 'sternum_05_C','sternocostal_05_L','sternocostal_05_R',  # 56
+
+             'thoriac_vertibrae_C04_C', 'rib_04_L', 'rib_04_R', 'sternum_04_C', 'sternocostal_04_L','sternocostal_04_R', # 62
+
+             'thoriac_vertibrae_C03_C', 'rib_03_L', 'rib_03_R', 'sternum_03_C','sternocostal_03_L','sternocostal_03_R',  # 68
+
+             'thoriac_vertibrae_C02_C', 'rib_02_L', 'rib_02_R', 'sternum_02_C','sternocostal_02_L','sternocostal_02_R',  # 74
+
+             'thoriac_vertibrae_C01_C', 'rib_01_L', 'rib_01_R', 'sternum_01_C','sternocostal_01_L','sternocostal_01_R',  # 80
+        ]
+
+    for i in range(81):
+
+        if i < 1:
+            cmds.skinCluster(name+"folicle_13_jj", spine[i], n=spine[i] + '_cluster', tsb=True, bm=0, sm=0,
+                             nw=1)
+        elif i > 0 and i < 4:
+            cmds.skinCluster(name+"folicle_12_jj", spine[i], n=spine[i] + '_cluster', tsb=True, bm=0, sm=0,
+                             nw=1)
+        elif i > 3 and i < 7:
+            cmds.skinCluster(name+"folicle_11_jj", spine[i], n=spine[i] + '_cluster', tsb=True, bm=0, sm=0,
+                             nw=1)
+        elif i > 6 and i < 17:
+            cmds.skinCluster(name+"folicle_10_jj", spine[i], n=spine[i] + '_cluster', tsb=True, bm=0, sm=0,
+                             nw=1)
+        elif i > 16 and i < 27:
+            cmds.skinCluster(name+"folicle_09_jj", spine[i], n=spine[i] + '_cluster', tsb=True, bm=0, sm=0,
+                             nw=1)
+        elif i > 26 and i < 39:
+            cmds.skinCluster(name+"folicle_08_jj", spine[i], n=spine[i] + '_cluster', tsb=True, bm=0, sm=0,
+                             nw=1)
+        elif i > 38 and i < 45:
+            cmds.skinCluster(name + "folicle_07_jj", spine[i], n=spine[i] + '_cluster', tsb=True, bm=0, sm=0,
+                             nw=1)
+        elif i > 44 and i < 51:
+            cmds.skinCluster(name + "folicle_06_jj", spine[i], n=spine[i] + '_cluster', tsb=True, bm=0, sm=0,
+                             nw=1)
+        elif i > 50 and i < 57:
+            cmds.skinCluster(name + "folicle_05_jj", spine[i], n=spine[i] + '_cluster', tsb=True, bm=0, sm=0,
+                             nw=1)
+        elif i > 56 and i < 63:
+            cmds.skinCluster(name + "folicle_04_jj", spine[i], n=spine[i] + '_cluster', tsb=True, bm=0, sm=0,
+                             nw=1)
+        elif i > 62 and i < 69:
+            cmds.skinCluster(name + "folicle_03_jj", spine[i], n=spine[i] + '_cluster', tsb=True, bm=0, sm=0,
+                             nw=1)
+        elif i > 68 and i < 75:
+            cmds.skinCluster(name + "folicle_02_jj", spine[i], n=spine[i] + '_cluster', tsb=True, bm=0, sm=0,
+                             nw=1)
+        elif i > 74 and i < 81:
+            cmds.skinCluster(name + "folicle_01_jj", spine[i], n=spine[i] + '_cluster', tsb=True, bm=0, sm=0,
+                             nw=1)
+
+    cmds.select(d=1)
 
 
 
