@@ -183,10 +183,42 @@ def spineSetup():
 
     cmds.connectAttr('spine_twist_pma.output1D','Ciervo_spine_spIK.twist')
 
+    # mid controllers attributes...
+    cmds.expression(s='spine_folicle_01_jj.rotateX =  (Ciervo_c_spine_02_jc.rotateZ)*-0.1;', n='midC_1')
+    cmds.expression(s='spine_folicle_02_jj.rotateX =  (Ciervo_c_spine_02_jc.rotateZ)*-0.1;', n='midC_2')
+    
+    cmds.expression(s='spine_folicle_03_jj.rotateX =  (Ciervo_c_spine_02_jc.rotateZ)*-0.2;', n='midC_3')
+    cmds.expression(s='spine_folicle_04_jj.rotateX =  (Ciervo_c_spine_02_jc.rotateZ)*-0.2;', n='midC_4')
+    
+    cmds.expression(s='spine_folicle_05_jj.rotateX =  (Ciervo_c_spine_02_jc.rotateZ)*-0.4;', n='midC_5')
+    cmds.expression(s='spine_folicle_06_jj.rotateX =  (Ciervo_c_spine_02_jc.rotateZ)*-0.4;', n='midC_6')
+    
+    cmds.expression(s='spine_folicle_07_jj.rotateX =  (Ciervo_c_spine_02_jc.rotateZ)*-0.5;', n='midC_7')
+    cmds.expression(s='spine_folicle_08_jj.rotateX =  (Ciervo_c_spine_02_jc.rotateZ)*-0.6;', n='midC_8')
+    
+    cmds.expression(s='spine_folicle_09_jj.rotateX =  (Ciervo_c_spine_02_jc.rotateZ)*-0.8;', n='midC_9')
+    cmds.expression(s='spine_folicle_10_jj.rotateX =  (Ciervo_c_spine_02_jc.rotateZ)*-1.0;', n='midC_10')
+    
+    cmds.expression(s='spine_folicle_11_jj.rotateX =  (Ciervo_c_spine_02_jc.rotateZ)*-0.8;', n='midC_11')
+    cmds.expression(s='spine_folicle_12_jj.rotateX =  (Ciervo_c_spine_02_jc.rotateZ)*-0.6;', n='midC_12')
+    
+    cmds.expression(s='spine_folicle_13_jj.rotateX =  (Ciervo_c_spine_02_jc.rotateZ)*-0.5;', n='midC_13')
+
+    # stretchy spline implementation...
+    
+    
+
     #parenting jc to spine controls...
     cmds.parentConstraint(lib.project_Name +  '_c_chest_01_cc' ,lib.project_Name + '_c_spine_03_jc', maintainOffset=1)
     cmds.parentConstraint(lib.project_Name +  '_c_flank_01_cc',lib.project_Name + '_c_spine_02_jc',maintainOffset=1)
     cmds.parentConstraint(lib.project_Name + '_c_hip_01_cc', lib.project_Name + '_c_spine_01_jc',maintainOffset=1)
+
+
+
+
+    #parenting spine system to rig groups...
+
+
 
 def skinToSpine():
 
