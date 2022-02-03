@@ -166,9 +166,17 @@ def spineSetup():
 
     cmds.move(0, 134.74144 ,27.218098 ,lib.project_Name + '_c_chest_01_cc' + '.scalePivot',
               lib.project_Name + '_c_chest_01_cc' + '.rotatePivot', absolute=True)
+
     cmds.select(d=1)
 
+    lib.controlType('centralCtrl',lib.project_Name + '_c_global_01_cc',10,lib.project_Name + '_c_global_01_cc_off')
+    cmds.setAttr(lib.project_Name + '_c_global_01_cc_off'+'.sz',4)
+    cmds.setAttr(lib.project_Name + '_c_global_01_cc_off' + '.ty', 170)
+    cmds.setAttr(lib.project_Name + '_c_global_01_cc_off' + '.tz', -19.133)
 
+    cmds.parent('Ciervo_c_hip_01_cc_off', 'Ciervo_c_flank_01_cc_off', 'Ciervo_c_chest_01_cc_off',
+                'Ciervo_c_global_01_cc')
+    cmds.select(d=1)
     #connecting attributes...
 
     cmds.createNode('multiplyDivide', n='spine_twist_multi')
@@ -204,20 +212,95 @@ def spineSetup():
     
     cmds.expression(s='spine_folicle_13_jj.rotateX =  (Ciervo_c_spine_02_jc.rotateZ)*-0.5;', n='midC_13')
 
-    # stretchy spline implementation...
-    
-    
+    # stretchy spline implementation...[added in nexct version if needed ]
+    #connectAttr -force spine_ik_curveShape.worldSpace[0] spine_curve_qwk.inputCurve;
+
+    #mid follow setup..
+    cmds.spaceLocator(p=(0, 0, 0), n="world_space_locator")
+    cmds.select("Ciervo_c_flank_01_cc")
+    cmds.addAttr(ln="mid_follow", at="enum", en="both:world:chest:hip")
+    cmds.setAttr("Ciervo_c_flank_01_cc.mid_follow", e=1, k=1)
+
+    cmds.parentConstraint("Ciervo_c_hip_01_cc", "Ciervo_c_chest_01_cc", "world_space_locator",
+                          "Ciervo_c_flank_01_cc_off", mo=1)
+
+    cmds.createNode("condition", n="follow_both")
+    cmds.createNode("condition", n="follow_hip")
+    cmds.createNode("condition", n="follow_chest")
+    cmds.createNode("condition", n="follow_world")
+
+    cmds.connectAttr("Ciervo_c_flank_01_cc.mid_follow", "follow_both.firstTerm")
+    cmds.connectAttr("Ciervo_c_flank_01_cc.mid_follow", "follow_hip.firstTerm")
+    cmds.connectAttr("Ciervo_c_flank_01_cc.mid_follow", "follow_chest.firstTerm")
+    cmds.connectAttr("Ciervo_c_flank_01_cc.mid_follow", "follow_world.firstTerm")
+
+    cmds.connectAttr("follow_both.outColorR","Ciervo_c_flank_01_cc_off_parentConstraint1.Ciervo_c_chest_01_ccW1")  # chest
+    cmds.connectAttr("follow_both.outColorG", "Ciervo_c_flank_01_cc_off_parentConstraint1.Ciervo_c_hip_01_ccW0")  # hip
+    cmds.connectAttr("follow_both.outColorB","Ciervo_c_flank_01_cc_off_parentConstraint1.world_space_locatorW2")  # world
+
+    #follow both attributes...
+
+    cmds.setAttr("follow_both.colorIfTrueR",1)
+    cmds.setAttr("follow_both.colorIfTrueG", 1)
+    cmds.setAttr("follow_both.colorIfTrueB", 0)
+    cmds.setAttr("follow_both.colorIfFalseR", 0)
+    cmds.setAttr("follow_both.colorIfFalseG", 0)
+    cmds.setAttr("follow_both.colorIfFalseB", 1)
+
+
+
+    #world..
+    cmds.setAttr("follow_world.secondTerm", 1)
+
+    cmds.setAttr("follow_world.colorIfTrueR", 1)
+    cmds.setAttr("follow_world.colorIfFalseR", 0)
+
+    cmds.connectAttr("follow_world.outColorR","follow_both.colorIfFalseB")
+
+    #chest..
+    cmds.setAttr("follow_chest.secondTerm", 2)
+
+    cmds.setAttr("follow_chest.colorIfTrueR", 1)
+    cmds.setAttr("follow_chest.colorIfFalseR", 0)
+
+    cmds.connectAttr("follow_chest.outColorR", "follow_both.colorIfFalseR")
+
+    # hip
+    cmds.setAttr("follow_hip.secondTerm", 3)
+
+    cmds.setAttr("follow_hip.colorIfTrueR", 1)
+    cmds.setAttr("follow_hip.colorIfFalseR", 0)
+
+    cmds.connectAttr("follow_hip.outColorR", "follow_both.colorIfFalseG")
 
     #parenting jc to spine controls...
     cmds.parentConstraint(lib.project_Name +  '_c_chest_01_cc' ,lib.project_Name + '_c_spine_03_jc', maintainOffset=1)
     cmds.parentConstraint(lib.project_Name +  '_c_flank_01_cc',lib.project_Name + '_c_spine_02_jc',maintainOffset=1)
     cmds.parentConstraint(lib.project_Name + '_c_hip_01_cc', lib.project_Name + '_c_spine_01_jc',maintainOffset=1)
+    cmds.select(d=1)
+    #parenting to rig group...
+    cmds.parent(lib.project_Name + '_c_global_01_cc_off',lib.project_Name + '_CR_CC')
+    cmds.select(d=1)
+    cmds.parent(lib.project_Name + '_c_spine_01_jc',lib.project_Name + '_CR_SKL')
+    cmds.select(d=1)
+    cmds.parent(lib.project_Name + '_c_spine_02_jc', lib.project_Name + '_CR_SKL')
+    cmds.select(d=1)
+    cmds.parent(lib.project_Name + '_c_spine_03_jc', lib.project_Name + '_CR_SKL')
+    cmds.select(d=1)
 
+    cmds.parent("world_space_locator",lib.project_Name + '_CR_LOC')
+    cmds.select(d=1)
 
+    cmds.parent(lib.project_Name + '_spine_spIK',lib.project_Name + '_CR_IK')
+    cmds.select(d=1)
 
+    cmds.parent('spine_proxyRibbon', lib.project_Name + '_CR_XTR')
+    cmds.parent('Spine_folicle_grp', lib.project_Name + '_CR_XTR')
+    cmds.parent('spine_ik_curve', lib.project_Name + '_CR_XTR')
 
-    #parenting spine system to rig groups...
-
+    cmds.hide('spine_proxyRibbon')
+    cmds.hide('Spine_folicle_grp')
+    cmds.hide('spine_ik_curve')
 
 
 def skinToSpine():

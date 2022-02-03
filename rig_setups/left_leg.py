@@ -265,7 +265,7 @@ def leftLegSetup():
     # parent leg components to it relevant project structure
 
     cmds.parent(lib.project_Name + '_root_l_LOC', lib.project_Name + '_CR_LOC')
-    cmds.hide(lib.project_Name + '_CR_LOC')
+
 
     cmds.select(d=1)
 

@@ -163,6 +163,13 @@ def controlType( ctrlType,ctrlName,scale,parentGrpName):
         cmds.scale(scale, scale, scale, circleFourArrow + '.cv[0:36]')
         cmds.group(ctrlName, n=parentGrpName)
 
+    elif ctrlType == 'centralCtrl':
+        centralCtrl = cmds.curve(p=[[-2.002, 0.0, -2.002], [-2.002, 0.0, 2.002], [2.002, 0.0, 2.002], [2.002, 0.0, -2.002],
+                                        [-2.002, 0.0, -2.002]],d=1,n = ctrlName)
+
+        cmds.scale(scale, scale, scale, centralCtrl + '.cv[0:4]')
+        cmds.group(ctrlName, n=parentGrpName)
+
     elif ctrlType == 'singleArrow':
         singleArrow = cmds.curve(p=[[-0.0, 0.0, -2.002], [1.601, -0.0, -0.4], [0.801, 0.0, -0.4], [0.801, 0.0, 2.002], [-0.801, 0.0, 2.002],
                [-0.801, -0.0, -0.4], [-1.601, 0.0, -0.4], [-0.0, 0.0, -2.002]], d=1,n = ctrlName)

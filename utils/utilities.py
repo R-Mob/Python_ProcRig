@@ -28,6 +28,11 @@ def projectStructure():
     cmds.parent(proxy_grp, highpoly_grp, skeleton_grp, crshp_grp, geo_grp)
     cmds.parent(ort_grp, geo_grp, xtr_grp, main_grp)
 
+    cmds.hide(lib.project_Name + '_CR_LOC')
+    cmds.hide(lib.project_Name + '_CR_SKL')
+    cmds.hide(lib.project_Name + '_CR_IK')
+    cmds.hide(lib.project_Name + '_CR_SKL')
+
 def locPlacement():
     ### locator placement as proxy jnt setup..
     # Spine locators...
@@ -110,17 +115,17 @@ def locPlacement():
 def globalController():
     lib.controlType('circleFourArrow',lib.project_Name +'_Translation_cc',80,lib.project_Name +'_Translation_cc_off')
     cmds.setAttr(lib.project_Name +'_Translation_cc_off'+'.tz',-10)
-    lib.controlType('circle', lib.project_Name + '_Scale_cc', 70, lib.project_Name + '_Scale_cc_off')
-    cmds.setAttr(lib.project_Name + '_Scale_cc' + '.rx', 90)
+    #lib.controlType('circle', lib.project_Name + '_Scale_cc', 70, lib.project_Name + '_Scale_cc_off')
+    #cmds.setAttr(lib.project_Name + '_Scale_cc' + '.rx', 90)
     cmds.select(d=True)
-    cmds.makeIdentity(lib.project_Name + '_Scale_cc',apply=1,t=1,r=1,s=1,n=0,pn=1)
-    cmds.setAttr(lib.project_Name + '_Scale_cc_off' + '.tz', -10)
+    #cmds.makeIdentity(lib.project_Name + '_Scale_cc',apply=1,t=1,r=1,s=1,n=0,pn=1)
+    #cmds.setAttr(lib.project_Name + '_Scale_cc_off' + '.tz', -10)
     cmds.select(d=True)
-    cmds.parent(lib.project_Name + '_Scale_cc_off',lib.project_Name +'_Translation_cc')
+    #cmds.parent(lib.project_Name + '_Scale_cc_off',lib.project_Name +'_Translation_cc')
     cmds.parent(lib.project_Name + '_Translation_cc_off',lib.project_Name +'_CR_ALL' )
     cmds.select(d=True)
-    cmds.parentConstraint(lib.project_Name + '_Scale_cc',lib.project_Name + '_CR_ORT',mo=1)
-    cmds.scaleConstraint(lib.project_Name + '_Scale_cc', lib.project_Name + '_CR_SCL', mo=1)
+    cmds.parentConstraint(lib.project_Name +'_Translation_cc',lib.project_Name + '_CR_ORT',mo=1)
+    #cmds.scaleConstraint(lib.project_Name + '_Scale_cc', lib.project_Name + '_CR_SCL', mo=1)
 
 
 
